@@ -1,0 +1,5 @@
+# Arquivo CODEOWNERS
+# Estes são os Code Owners do repositório
+
+# Padrão para todos os arquivos
+* @quality-digital/security-team
