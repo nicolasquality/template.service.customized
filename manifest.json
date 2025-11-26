@@ -21,6 +21,20 @@
       }
     },
     {
+      "name": "outbound-access",
+      "attrs": {
+        "host": "jsonplaceholder.typicode.com",
+        "path": "/*"
+      }
+    },
+    {
+      "name": "outbound-access",
+      "attrs": {
+        "host": "acctglobal.vtexcommercestable.com.br",
+        "path": "*"
+      }
+    },
+    {
       "name": "colossus-fire-event"
     },
     {
@@ -33,5 +47,24 @@
       "name": "vbase-read-write"
     }
   ],
+  "settingsSchema": {
+    "title": "getProductByID",
+    "description": "Get products by id on vtex catalog API",
+    "type": "object",
+    "properties": {
+      "appKeyGetProductByID": {
+        "type": "string",
+        "title": "App Key",
+        "description": "Get your app key at https://developers.vtex.com/docs/guides/getting-an-app-key",
+        "default": ""
+      },
+      "appTokenGetProductByID": {
+        "type": "string",
+        "title": "App Token for auth",
+        "description": "Get your token at https://developers.vtex.com/docs/guides/getting-an-app-token",
+        "default": ""
+      }
+    }
+  },
   "$schema": "https://raw.githubusercontent.com/vtex/node-vtex-api/master/gen/manifest.schema"
 }

@@ -21,6 +21,23 @@
     "deleteDocument": {
       "path": "/_v/deleteDocument",
       "public": true
+    },
+    "getPosts": {
+      "path": "/_v/getPosts",
+      "public": true
+    },
+    "getPostById": {
+      "path": "/_v/getPostById/:id",
+      "public": true
+    },
+    "createPost": {
+      "path": "/_v/createPost",
+      "method": "POST",
+      "public": true
+    },
+    "getProductById": {
+      "path": "/_v/getProductById/:id",
+      "public": true
     }
   }
 }

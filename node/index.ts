@@ -10,6 +10,10 @@ import { Clients } from './clients'
 import { deleteDocument } from './middlewares/vbase/deleteDocument'
 import { getDocument } from './middlewares/vbase/getDocument'
 import { createDocument } from './middlewares/vbase/createDocument'
+import createPostMiddleware from './middlewares/placeholder/createPostMiddleware'
+import getPostsMiddleware from './middlewares/placeholder/getPostsMiddleware'
+import getPostByIdMiddleware from './middlewares/placeholder/getPostByIdMiddleware'
+import getProductByIdMiddleware from './middlewares/catalog/getProductById'
 const TIMEOUT_MS = 800
 
 // Create a LRU memory cache for the Status client.
@@ -60,6 +64,21 @@ export default new Service({
 
     deleteDocument: method({
       DELETE: [deleteDocument],
+    }),
+
+    createPost: method({
+      POST: [createPostMiddleware],
+    }),
+
+    getPosts: method({
+      GET: [getPostsMiddleware],
+    }),
+
+    getPostById: method({
+      GET: [getPostByIdMiddleware],
+    }),
+    getProductById: method({
+      GET: [getProductByIdMiddleware],
     }),
   },
 })
