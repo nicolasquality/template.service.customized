@@ -1,23 +1,43 @@
-async function getPostByIdMiddleware(
+import { getAppSettings } from '../settings'
+export async function getProductByIDMiddleware(
   ctx: Context,
-  next: () => Promise<unknown>
+  next: () => Promise<void>
 ) {
   const {
-    clients: { placeholder },
+    vtex: {
+      route: { params },
+    },
+    clients: { catalog },
   } = ctx
 
-  const { params } = ctx.params
+  const { id } = params
+
+  if (!id) {
+    throw new Error('Product ID is required')
+  }
 
   try {
-    const response = await placeholder.getPostById(params)
+    const appSettings = await getAppSettings(ctx)
+    const appKeyGetProductByID = appSettings.appKeyGetProductByID
+    const appTokenGetProductByID = appSettings.appTokenGetProductByID
+    const response = await catalog.getProductByID(
+      id.toString(),
+      appKeyGetProductByID,
+      appTokenGetProductByID
+    )
+
     ctx.status = 200
     ctx.body = response
+    await next()
   } catch (error) {
-    ctx.status = 500
+    ctx.status = error.response?.status
     ctx.body = {
-      error: error instanceof Error ? error.message : 'Erro ao buscar posts',
+      error: `Error fetching product by ID ${error}`,
+      details: error.message,
     }
+    await next()
+    return
   }
-  await next()
 }
-export default getPostByIdMiddleware
+
+export default getProductByIDMiddleware
